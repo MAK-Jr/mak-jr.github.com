@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-01-07T12:28:45+08:00</updated>
+  <updated>2013-01-07T15:16:15+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在Rails中使用Pry來做調試]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/01/07/zai-railszhong-shi-yong-prylai-zuo-diao-shi/"/>
+    <updated>2013-01-07T15:07:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/01/07/zai-railszhong-shi-yong-prylai-zuo-diao-shi</id>
+    <content type="html"><![CDATA[<ul>
+<li><p>首先安裝Pry這個Gem</p>
+
+<p>  <code>sudo gem install pry</code></p></li>
+<li>其他參考這篇文章</li>
+</ul>
+
+
+<p>　<a href="http://filipemoreira.com/blog/2012/03/09/using-pry-with-rails">Using Pry With Rails</a></p>
+
+<ul>
+<li>使用方法</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="nb">binding</span><span class="o">.</span><span class="n">pry</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>　　可以在Model, Controller, View裡面使用</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[英英字典的一些好處]]></title>

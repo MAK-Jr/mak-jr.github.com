@@ -9,9 +9,9 @@
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="想安裝Cloudfoundry的command line tool,所以就這樣來做 sudo gem install vmc 失敗,提示 1
-2
-ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &hellip;">
+  <meta name="description" content="簡單安裝 使用HomeBrew安裝mysql brew install mysql
+配置數據庫 1
+$ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +66,58 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/">在Mac OS X安裝Mysql</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-13T18:26:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>簡單安裝</p>
+
+<ol>
+<li><p>使用HomeBrew安裝mysql</p>
+
+<p> <code>brew install mysql</code></p></li>
+<li><p>配置數據庫</p></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>-=Done=-</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -374,6 +426,10 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/">在Mac OS X安裝Mysql</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/01/13/ruby-gemsli-xian-ji/">Ruby gems歷險記</a>

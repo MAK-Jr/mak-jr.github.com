@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-01-07T15:16:15+08:00</updated>
+  <updated>2013-01-13T16:17:39+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby gems歷險記]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/"/>
+    <updated>2013-01-13T16:10:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji</id>
+    <content type="html"><![CDATA[<p>想安裝Cloudfoundry的command line tool,所以就這樣來做</p>
+
+<p><code>sudo gem install vmc</code></p>
+
+<p>失敗,提示</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ERROR:  While executing gem ... (Zlib::GzipFile::Error)
+</span><span class='line'>    not in gzip format</span></code></pre></td></tr></table></div></figure>
+
+
+<p>懷疑是網絡問題,所以查看gem的sources,運行</p>
+
+<p><code>gem sources</code></p>
+
+<p>輸出:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*** CURRENT SOURCES ***
+</span><span class='line'>
+</span><span class='line'>http://rubygems.org/
+</span><span class='line'>http://ruby.taobao.org
+</span><span class='line'>http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>依次把其他sources都刪除,只留 <code>http://rubygems.org/</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -r http://ruby.taobao.org
+</span><span class='line'>gem sources -r http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再次運行:</p>
+
+<p><code>sudo gem install vmc</code></p>
+
+<p>成功!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在Rails中使用Pry來做調試]]></title>

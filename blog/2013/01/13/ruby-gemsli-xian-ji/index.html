@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>The Very Beginning - Pitt Mak</title>
+  <title>Ruby gems歷險記 - Pitt Mak</title>
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="Welcome! 1
-[rectangle setX: 10 y: 10 width: 20 height: 20]; ">
+  <meta name="description" content="想安裝Cloudfoundry的command line tool,所以就這樣來做 sudo gem install vmc 失敗,提示 1
+2
+ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/01/04/the-very-beginning/">
+  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -68,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">The Very Beginning</h1>
+      <h1 class="entry-title">Ruby Gems歷險記</h1>
     
     
       <p class="meta">
@@ -84,7 +85,7 @@
   
 
 
-<time datetime="2013-01-04T10:22:00+08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time>
+<time datetime="2013-01-13T16:10:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,14 +94,49 @@
   </header>
 
 
-<div class="entry-content"><p>Welcome!</p>
+<div class="entry-content"><p>想安裝Cloudfoundry的command line tool,所以就這樣來做</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">[</span><span class="n">rectangle</span> <span class="nl">setX:</span> <span class="mi">10</span> <span class="nl">y:</span> <span class="mi">10</span> <span class="nl">width:</span> <span class="mi">20</span> <span class="nl">height:</span> <span class="mi">20</span><span class="p">];</span>
-</span></code></pre></td></tr></table></div></figure>
+<p><code>sudo gem install vmc</code></p>
+
+<p>失敗,提示</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ERROR:  While executing gem ... (Zlib::GzipFile::Error)
+</span><span class='line'>    not in gzip format</span></code></pre></td></tr></table></div></figure>
 
 
+<p>懷疑是網絡問題,所以查看gem的sources,運行</p>
 
+<p><code>gem sources</code></p>
+
+<p>輸出:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*** CURRENT SOURCES ***
+</span><span class='line'>
+</span><span class='line'>http://rubygems.org/
+</span><span class='line'>http://ruby.taobao.org
+</span><span class='line'>http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>依次把其他sources都刪除,只留 <code>http://rubygems.org/</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -r http://ruby.taobao.org
+</span><span class='line'>gem sources -r http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再次運行:</p>
+
+<p><code>sudo gem install vmc</code></p>
+
+<p>成功!</p>
 </div>
 
 
@@ -123,7 +159,7 @@
   
 
 
-<time datetime="2013-01-04T10:22:00+08:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time>
+<time datetime="2013-01-13T16:10:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
       
 
 
@@ -131,7 +167,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/01/04/the-very-beginning/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/01/04/the-very-beginning/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/" >Tweet</a>
   
   
   
@@ -140,8 +176,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/01/07/zai-railszhong-shi-yong-prylai-zuo-diao-shi/" title="Previous Post: 在Rails中使用Pry來做調試">&laquo; 在Rails中使用Pry來做調試</a>
       
-        <a class="basic-alignment right" href="/blog/2013/01/04/ying-ying-zi-dian-de-yi-xie-hao-chu/" title="Next Post: 英英字典的一些好處">英英字典的一些好處 &raquo;</a>
       
     </p>
   </footer>
@@ -204,8 +240,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/01/04/the-very-beginning/';
-        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/01/04/the-very-beginning/';
+        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/';
+        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/';
         var disqus_script = 'embed.js';
       
     (function () {

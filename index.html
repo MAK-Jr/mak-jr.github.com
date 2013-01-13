@@ -9,10 +9,9 @@
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="
-首先安裝Pry這個Gem sudo gem install pry
-其他參考這篇文章 　Using Pry With Rails 使用方法 1 binding.pry 　　可以在Model, Controller, View裡面使用
-">
+  <meta name="description" content="想安裝Cloudfoundry的command line tool,所以就這樣來做 sudo gem install vmc 失敗,提示 1
+2
+ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +66,86 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/13/ruby-gemsli-xian-ji/">Ruby Gems歷險記</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-13T16:10:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/01/13/ruby-gemsli-xian-ji/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>想安裝Cloudfoundry的command line tool,所以就這樣來做</p>
+
+<p><code>sudo gem install vmc</code></p>
+
+<p>失敗,提示</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ERROR:  While executing gem ... (Zlib::GzipFile::Error)
+</span><span class='line'>    not in gzip format</span></code></pre></td></tr></table></div></figure>
+
+
+<p>懷疑是網絡問題,所以查看gem的sources,運行</p>
+
+<p><code>gem sources</code></p>
+
+<p>輸出:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>*** CURRENT SOURCES ***
+</span><span class='line'>
+</span><span class='line'>http://rubygems.org/
+</span><span class='line'>http://ruby.taobao.org
+</span><span class='line'>http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>依次把其他sources都刪除,只留 <code>http://rubygems.org/</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -r http://ruby.taobao.org
+</span><span class='line'>gem sources -r http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再次運行:</p>
+
+<p><code>sudo gem install vmc</code></p>
+
+<p>成功!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -295,6 +374,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/13/ruby-gemsli-xian-ji/">Ruby gems歷險記</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/01/07/zai-railszhong-shi-yong-prylai-zuo-diao-shi/">在Rails中使用Pry來做調試</a>

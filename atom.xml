@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-01-13T18:29:58+08:00</updated>
+  <updated>2013-01-13T18:33:27+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -30,6 +30,15 @@
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><p>運行mysql和進入管理界面</p>
+
+<p> <code>/usr/local/opt/mysql/bin/mysqld_safe &amp;</code></p>
+
+<p> <code>mysql -uroot</code></p></li>
+</ol>
 
 
 <p>-=Done=-</p>

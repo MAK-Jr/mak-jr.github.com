@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>CF上面自造一个CronJob - Pitt Mak</title>
+  <meta name="author" content="Pitt Mak">
+
+  
+  <meta name="description" content="問題: CloundFoundry(以下簡稱CF)上面沒有提供CronJob(定時背景任務)的功能,所以,自己想打造一個守護程式來做網頁抓取. 方法: 首先,往CF部署一個默認的Rails程式.這方面的教程可以參考CF的Documents 然後,可以在CF上面的rails裡面新建一個Process &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Pitt Mak" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Pitt Mak</a></h1>
+  
+    <h2>Ruby/Rails/Objective-C.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:MAK-Jr.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">CF上面自造一个CronJob</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-15T15:29:00+08:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>問題:</p>
+
+<p>CloundFoundry(以下簡稱CF)上面沒有提供CronJob(定時背景任務)的功能,所以,自己想打造一個守護程式來做網頁抓取.</p>
+
+<p>方法:</p>
+
+<p>首先,往CF部署一個默認的Rails程式.這方面的教程可以參考CF的<a href="http://docs.cloudfoundry.com/frameworks/ruby/rails-3-1.html">Documents</a></p>
+
+<p>然後,可以在CF上面的rails裡面新建一個Process,用來跑deamon.rb(我們的守護程式,放到Rails的根目錄下面,因為CF上面用戶的當前目錄便是此目錄,方便敲打命令)</p>
+
+<p>最後,我把需要用到的關鍵代碼貼一下,主要是Controller的代碼:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ShellController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="c1">#binding.pry</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span>
+</span><span class='line'>      <span class="n">cmd</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="s1">&#39;cmd&#39;</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">t</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="s1">&#39;type&#39;</span><span class="o">]</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s1">&#39;fork&#39;</span>
+</span><span class='line'>        <span class="vi">@output</span> <span class="o">=</span> <span class="n">fork_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">elsif</span> <span class="n">t</span> <span class="o">==</span> <span class="s1">&#39;nofork&#39;</span>
+</span><span class='line'>        <span class="vi">@output</span> <span class="o">=</span> <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>        <span class="vi">@output</span> <span class="o">=</span> <span class="vi">@output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;&lt;br \&gt;&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span>
+</span><span class='line'>      <span class="vi">@output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">fork_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">Thread</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>      <span class="nb">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="c1">#fork { cmd }</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="sx">%x[</span><span class="si">#{</span><span class="n">cmd</span><span class="si">}</span><span class="sx">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最最關鍵的地方是這裡:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">fork_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">Thread</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>      <span class="nb">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="c1">#fork { cmd }</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原先我用了<code>fork {cmd}</code>,但是這樣的話,無法用kill這個命令來關掉fork出來的Process,所以改用Thread.new.</p>
+
+<p>整個demo可以在下面的地址看到<a href="http://ruby-web-shell.cloudfoundry.com/shell">Demo</a></p>
+
+<p>先輸入<code>ruby　deamon.rb</code>,再修改type為fork.提交.</p>
+
+<p>然後輸入ps,提交.應該就可以看到已經有兩個ruby進程在跑了.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Pitt Mak</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-15T15:29:00+08:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/" title="Previous Post: 在Mac OS X安裝Mysql">&laquo; 在Mac OS X安裝Mysql</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/">CF上面自造一个CronJob</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/">在Mac OS X安裝Mysql</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/13/ruby-gemsli-xian-ji/">Ruby gems歷險記</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/07/zai-railszhong-shi-yong-prylai-zuo-diao-shi/">在Rails中使用Pry來做調試</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/04/ying-ying-zi-dian-de-yi-xie-hao-chu/">英英字典的一些好處</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Pitt Mak -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'pittmak';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/';
+        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

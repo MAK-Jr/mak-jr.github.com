@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-01-23T16:16:27+08:00</updated>
+  <updated>2013-01-23T16:34:37+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,15 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[成功部署octopress]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/01/23/cheng-gong-bu-shu-octopress/"/>
+    <updated>2013-01-23T16:31:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/01/23/cheng-gong-bu-shu-octopress</id>
+    <content type="html"><![CDATA[<p>這次是部署沒有用<code>rake　deploy</code>,而是進入_deploy後,<code>git　push　origin</code>,使用的是https的repo</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[git代理设置和https通道]]></title>

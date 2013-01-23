@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-01-23T16:34:37+08:00</updated>
+  <updated>2013-01-23T16:54:18+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -65,6 +65,34 @@
 </span><span class='line'>　</span></code></pre></td></tr></table></div></figure>
 
 
+<p>　</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>　一下是針對部署在github上面的octopress
+</span><span class='line'>　cd octopress
+</span><span class='line'>　git remote rm origin
+</span><span class='line'>　git remote add orgin https://github.com/MAK-Jr/mak-jr.github.com.git 
+</span><span class='line'>　cd _deploy
+</span><span class='line'>　　git remote add orgin https://github.com/MAK-Jr/mak-jr.github.com.git 
+</span><span class='line'>
+</span><span class='line'>  然後就可以
+</span><span class='line'>  rake deploy
+</span><span class='line'>  git add .
+</span><span class='line'>  git commit -m "new post"
+</span><span class='line'>  git push origin source
+</span><span class='line'>　</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>

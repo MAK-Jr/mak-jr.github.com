@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-01-15T21:26:37+08:00</updated>
+  <updated>2013-01-23T15:48:22+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[git代理设置和https通道]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/01/23/gitdai-li-she-zhi-he-httpstong-dao/"/>
+    <updated>2013-01-23T15:34:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/01/23/gitdai-li-she-zhi-he-httpstong-dao</id>
+    <content type="html"><![CDATA[<p>這幾天GFW的魔爪已經伸向github了,導致現在git已經無法使用,但是,如果你是使用goagent來翻牆的話,還是能解決這個問題的.</p>
+
+<ul>
+<li><p>升級git(起碼要git version 1.7.10.4以上)</p></li>
+<li><p>其次修改你本地git的remote</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git remote add origin https://github.com/user/repo.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>   這個根據你的repo而定,注意一定要用https,而不是ssh</p>
+
+<ul>
+<li>修改git的http代理.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git config --global http.proxy "127.0.0.1:8087"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>127.0.0.1:8087</code>這個是goagent默認的代理服務器</p>
+
+<ul>
+<li><p>最後,如果你<code>git push origin master</code>的話,會提示github的用戶名和密碼.</p></li>
+<li><p>如果不打算用代理了,可以直接
+　</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>　 git config --global http.proxy ""
+</span><span class='line'>　</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CF上面自造一个CronJob]]></title>

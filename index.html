@@ -9,7 +9,9 @@
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="問題: CloundFoundry(以下簡稱CF)上面沒有提供CronJob(定時背景任務)的功能,所以,自己想打造一個守護程式來做網頁抓取. 方法: 首先,往CF部署一個默認的Rails程式.這方面的教程可以參考CF的Documents 然後,可以在CF上面的rails裡面新建一個Process &hellip;">
+  <meta name="description" content="這幾天GFW的魔爪已經伸向github了,導致現在git已經無法使用,但是,如果你是使用goagent來翻牆的話,還是能解決這個問題的. 升級git(起碼要git version 1.7.10.4以上)
+其次修改你本地git的remote 1
+git remote add origin https &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +67,82 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/23/gitdai-li-she-zhi-he-httpstong-dao/">Git代理设置和https通道</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-23T15:34:00+08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/01/23/gitdai-li-she-zhi-he-httpstong-dao/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>這幾天GFW的魔爪已經伸向github了,導致現在git已經無法使用,但是,如果你是使用goagent來翻牆的話,還是能解決這個問題的.</p>
+
+<ul>
+<li><p>升級git(起碼要git version 1.7.10.4以上)</p></li>
+<li><p>其次修改你本地git的remote</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git remote add origin https://github.com/user/repo.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>   這個根據你的repo而定,注意一定要用https,而不是ssh</p>
+
+<ul>
+<li>修改git的http代理.</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git config --global http.proxy "127.0.0.1:8087"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  <code>127.0.0.1:8087</code>這個是goagent默認的代理服務器</p>
+
+<ul>
+<li><p>最後,如果你<code>git push origin master</code>的話,會提示github的用戶名和密碼.</p></li>
+<li><p>如果不打算用代理了,可以直接
+　</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>　 git config --global http.proxy ""
+</span><span class='line'>　</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -576,6 +654,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/01/23/gitdai-li-she-zhi-he-httpstong-dao/">git代理设置和https通道</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/">CF上面自造一个CronJob</a>
       </li>
     
@@ -589,10 +671,6 @@
     
       <li class="post">
         <a href="/blog/2013/01/07/zai-railszhong-shi-yong-prylai-zuo-diao-shi/">在Rails中使用Pry來做調試</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/04/ying-ying-zi-dian-de-yi-xie-hao-chu/">英英字典的一些好處</a>
       </li>
     
   </ul>

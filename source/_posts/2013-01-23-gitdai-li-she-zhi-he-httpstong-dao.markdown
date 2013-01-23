@@ -33,3 +33,18 @@ categories:
 　 {% endcodeblock %}
 
 	
+	
+　{% codeblock %}
+　一下是針對部署在github上面的octopress
+　cd octopress
+　git remote rm origin
+　git remote add orgin https://github.com/MAK-Jr/mak-jr.github.com.git 
+　cd _deploy
+　　git remote add orgin https://github.com/MAK-Jr/mak-jr.github.com.git 
+
+  然後就可以
+  rake deploy
+  git add .
+  git commit -m "new post"
+  git push origin source
+　{% endcodeblock %}

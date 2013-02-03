@@ -9,8 +9,7 @@
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="這次是部署沒有用rake　deploy,而是進入_deploy後,git　push　origin,使用的是https的repo
-">
+  <meta name="description" content="默認情況下,運行rake assets:precompile, 打開頁面後, rails會提示找不到application.js等等一些assets, 出現這種情況的原因是在production模式下運行的public目錄是沒有expose給用戶的,這樣設計是由ngix和apache這些web &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,48 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/">Rails 3.2.11 Assets Pipeline Error Solution</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-03T21:24:00+08:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>默認情況下,運行<code>rake assets:precompile</code>, 打開頁面後, rails會提示找不到application.js等等一些assets, 出現這種情況的原因是在production模式下運行的public目錄是沒有expose給用戶的,這樣設計是由ngix和apache這些web server來接管public目錄, 所以,如果只是用rails默認的server來跑的話,需要到<code>config/environments/production.rb</code>修改一行, 讓public目錄expose出來.</p>
+
+<p><code>config.serve_static_assets = true</code></p>
+
+<p>-=[完]=-</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -719,6 +760,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/">Rails 3.2.11 assets pipeline error solution</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/01/23/cheng-gong-bu-shu-octopress/">成功部署octopress</a>
       </li>
     
@@ -732,10 +777,6 @@
     
       <li class="post">
         <a href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/">在Mac OS X安裝Mysql</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/13/ruby-gemsli-xian-ji/">Ruby gems歷險記</a>
       </li>
     
   </ul>

@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ruby gems歷險記 - Pitt Mak</title>
+  <title>Rails 3.2.11 assets pipeline error solution - Pitt Mak</title>
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="想安裝Cloudfoundry的command line tool,所以就這樣來做 sudo gem install vmc 失敗,提示 1
-2
-ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &hellip;">
+  <meta name="description" content="默認情況下,運行rake assets:precompile, 打開頁面後, rails會提示找不到application.js等等一些assets, 出現這種情況的原因是在production模式下運行的public目錄是沒有expose給用戶的,這樣設計是由ngix和apache這些web &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/">
+  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +68,7 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
   
   <header>
     
-      <h1 class="entry-title">Ruby Gems歷險記</h1>
+      <h1 class="entry-title">Rails 3.2.11 Assets Pipeline Error Solution</h1>
     
     
       <p class="meta">
@@ -86,7 +84,7 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
   
 
 
-<time datetime="2013-01-13T16:10:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+<time datetime="2013-02-03T21:24:00+08:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -95,49 +93,11 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
   </header>
 
 
-<div class="entry-content"><p>想安裝Cloudfoundry的command line tool,所以就這樣來做</p>
+<div class="entry-content"><p>默認情況下,運行<code>rake assets:precompile</code>, 打開頁面後, rails會提示找不到application.js等等一些assets, 出現這種情況的原因是在production模式下運行的public目錄是沒有expose給用戶的,這樣設計是由ngix和apache這些web server來接管public目錄, 所以,如果只是用rails默認的server來跑的話,需要到<code>config/environments/production.rb</code>修改一行, 讓public目錄expose出來.</p>
 
-<p><code>sudo gem install vmc</code></p>
+<p><code>config.serve_static_assets = true</code></p>
 
-<p>失敗,提示</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ERROR:  While executing gem ... (Zlib::GzipFile::Error)
-</span><span class='line'>    not in gzip format</span></code></pre></td></tr></table></div></figure>
-
-
-<p>懷疑是網絡問題,所以查看gem的sources,運行</p>
-
-<p><code>gem sources</code></p>
-
-<p>輸出:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>*** CURRENT SOURCES ***
-</span><span class='line'>
-</span><span class='line'>http://rubygems.org/
-</span><span class='line'>http://ruby.taobao.org
-</span><span class='line'>http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>依次把其他sources都刪除,只留 <code>http://rubygems.org/</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -r http://ruby.taobao.org
-</span><span class='line'>gem sources -r http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>再次運行:</p>
-
-<p><code>sudo gem install vmc</code></p>
-
-<p>成功!</p>
+<p>-=[完]=-</p>
 </div>
 
 
@@ -160,7 +120,7 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
   
 
 
-<time datetime="2013-01-13T16:10:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+<time datetime="2013-02-03T21:24:00+08:00" pubdate data-updated="true">Feb 3<span>rd</span>, 2013</time>
       
 
 
@@ -168,7 +128,7 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/" >Tweet</a>
   
   
   
@@ -177,10 +137,8 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/01/07/zai-railszhong-shi-yong-prylai-zuo-diao-shi/" title="Previous Post: 在Rails中使用Pry來做調試">&laquo; 在Rails中使用Pry來做調試</a>
+        <a class="basic-alignment left" href="/blog/2013/01/23/cheng-gong-bu-shu-octopress/" title="Previous Post: 成功部署octopress">&laquo; 成功部署octopress</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/" title="Next Post: 在Mac OS X安裝Mysql">在Mac OS X安裝Mysql &raquo;</a>
       
     </p>
   </footer>
@@ -247,8 +205,8 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/';
-        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/01/13/ruby-gemsli-xian-ji/';
+        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/';
+        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/';
         var disqus_script = 'embed.js';
       
     (function () {

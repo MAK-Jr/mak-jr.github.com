@@ -9,7 +9,7 @@
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="默認情況下,運行rake assets:precompile, 打開頁面後, rails會提示找不到application.js等等一些assets, 出現這種情況的原因是在production模式下運行的public目錄是沒有expose給用戶的,這樣設計是由ngix和apache這些web &hellip;">
+  <meta name="description" content="Engine Yard 使用 Amazon Web Services(AWS) 作為服務器, 同時也提供了 SSH acess. 在大陸, 為了 bypass 國家的 firewall 去訪問一下被牆的網站, 通常都需要翻牆, 有了 AWS, 最最簡單的 bypass 方法, 就是用 ssh &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +65,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/">Use Engine Yard Service as a Socket5 Proxy</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-08T10:22:00+08:00" pubdate data-updated="true">Feb 8<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Engine Yard 使用 Amazon Web Services(AWS) 作為服務器, 同時也提供了 SSH acess. 在大陸, 為了 bypass 國家的 firewall 去訪問一下被牆的網站, 通常都需要翻牆, 有了 AWS, 最最簡單的 bypass 方法, 就是用 ssh 通道作為 socket5 代理, 就行了.</p>
+
+<p>所以, 建立好 instance 後, 直接用 <code>ssh -C2qTnN -D 8080 yourserver</code> 就可以在本地開一個 socket5 代理了. 配合 chrome 的代理外掛, 就可以順利翻牆了, 非常簡單.</p>
+
+<p><code>PS. Engine Yard 提供了500個小時的免費運行時間</code></p>
+
+<p><a href="http://www.engineyard.com">Engine Yard</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -760,6 +804,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/">Use Engine Yard service as a socket5 proxy</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/">Rails 3.2.11 assets pipeline error solution</a>
       </li>
     
@@ -773,10 +821,6 @@
     
       <li class="post">
         <a href="/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/">CF上面自造一个CronJob</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/">在Mac OS X安裝Mysql</a>
       </li>
     
   </ul>

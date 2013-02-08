@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>在Mac OS X安裝Mysql - Pitt Mak</title>
+  <title>Use Engine Yard service as a socket5 proxy - Pitt Mak</title>
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="簡單安裝 使用HomeBrew安裝mysql brew install mysql
-配置數據庫 1
-$ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/ &hellip;">
+  <meta name="description" content="Engine Yard 使用 Amazon Web Services(AWS) 作為服務器, 同時也提供了 SSH acess. 在大陸, 為了 bypass 國家的 firewall 去訪問一下被牆的網站, 通常都需要翻牆, 有了 AWS, 最最簡單的 bypass 方法, 就是用 ssh &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/">
+  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -70,7 +68,7 @@ $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" 
   
   <header>
     
-      <h1 class="entry-title">在Mac OS X安裝Mysql</h1>
+      <h1 class="entry-title">Use Engine Yard Service as a Socket5 Proxy</h1>
     
     
       <p class="meta">
@@ -86,7 +84,7 @@ $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" 
   
 
 
-<time datetime="2013-01-13T18:26:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+<time datetime="2013-02-08T10:22:00+08:00" pubdate data-updated="true">Feb 8<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -95,30 +93,13 @@ $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" 
   </header>
 
 
-<div class="entry-content"><p>簡單安裝</p>
+<div class="entry-content"><p>Engine Yard 使用 Amazon Web Services(AWS) 作為服務器, 同時也提供了 SSH acess. 在大陸, 為了 bypass 國家的 firewall 去訪問一下被牆的網站, 通常都需要翻牆, 有了 AWS, 最最簡單的 bypass 方法, 就是用 ssh 通道作為 socket5 代理, 就行了.</p>
 
-<ol>
-<li><p>使用HomeBrew安裝mysql</p>
+<p>所以, 建立好 instance 後, 直接用 <code>ssh -C2qTnN -D 8080 yourserver</code> 就可以在本地開一個 socket5 代理了. 配合 chrome 的代理外掛, 就可以順利翻牆了, 非常簡單.</p>
 
-<p> <code>brew install mysql</code></p></li>
-<li><p>配置數據庫</p></li>
-</ol>
+<p><code>PS. Engine Yard 提供了500個小時的免費運行時間</code></p>
 
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp</span></code></pre></td></tr></table></div></figure>
-
-
-<ol>
-<li><p>運行mysql和進入管理界面</p>
-
-<p> <code>/usr/local/opt/mysql/bin/mysqld_safe &amp;</code></p>
-
-<p> <code>mysql -uroot</code></p></li>
-</ol>
-
-
-<p>-=Done=-</p>
+<p><a href="http://www.engineyard.com">Engine Yard</a></p>
 </div>
 
 
@@ -141,7 +122,7 @@ $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" 
   
 
 
-<time datetime="2013-01-13T18:26:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+<time datetime="2013-02-08T10:22:00+08:00" pubdate data-updated="true">Feb 8<span>th</span>, 2013</time>
       
 
 
@@ -149,7 +130,7 @@ $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" 
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/" >Tweet</a>
   
   
   
@@ -158,10 +139,8 @@ $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/01/13/ruby-gemsli-xian-ji/" title="Previous Post: Ruby gems歷險記">&laquo; Ruby gems歷險記</a>
+        <a class="basic-alignment left" href="/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/" title="Previous Post: Rails 3.2.11 assets pipeline error solution">&laquo; Rails 3.2.11 assets pipeline error solution</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/" title="Next Post: CF上面自造一个CronJob">CF上面自造一个CronJob &raquo;</a>
       
     </p>
   </footer>
@@ -228,8 +207,8 @@ $ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" 
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/';
-        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/';
+        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/';
+        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-02-03T21:34:28+08:00</updated>
+  <updated>2013-02-08T10:29:04+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Use Engine Yard service as a socket5 proxy]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/"/>
+    <updated>2013-02-08T10:22:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy</id>
+    <content type="html"><![CDATA[<p>Engine Yard 使用 Amazon Web Services(AWS) 作為服務器, 同時也提供了 SSH acess. 在大陸, 為了 bypass 國家的 firewall 去訪問一下被牆的網站, 通常都需要翻牆, 有了 AWS, 最最簡單的 bypass 方法, 就是用 ssh 通道作為 socket5 代理, 就行了.</p>
+
+<p>所以, 建立好 instance 後, 直接用 <code>ssh -C2qTnN -D 8080 yourserver</code> 就可以在本地開一個 socket5 代理了. 配合 chrome 的代理外掛, 就可以順利翻牆了, 非常簡單.</p>
+
+<p><code>PS. Engine Yard 提供了500個小時的免費運行時間</code></p>
+
+<p><a href="http://www.engineyard.com">Engine Yard</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rails 3.2.11 assets pipeline error solution]]></title>

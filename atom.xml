@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-02-08T11:50:16+08:00</updated>
+  <updated>2013-05-05T10:17:23+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,175 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Deploy Nginx and Passenger on Ubuntu]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/05/05/deploy-nginx-and-passenger-on-ubuntu/"/>
+    <updated>2013-05-05T09:34:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/05/05/deploy-nginx-and-passenger-on-ubuntu</id>
+    <content type="html"><![CDATA[<ol>
+<li><p>安装编译器和一些依赖模块(如果更新包比较慢,请更换为中国的源,具体看这里http://yubosun.akcms.com/tech/ubuntu-apt-get-sources-lst.htm)</p>
+
+<p> <code>sudo apt-get update</code></p>
+
+<p> <code>sudo apt-get install -y build-essential openssl curl libcurl3-dev libreadline6 libreadline6-dev git zlib1g zlib1g-dev libssl-dev libyaml-dev libxml2-dev libxslt-dev autoconf automake libtool imagemagick libmagickwand-dev libpcre3-dev libsqlite3-dev libmysql-ruby libmysqlclient-dev</code></p></li>
+<li><p>安装 RVM</p>
+
+<p> <code>curl -L https://get.rvm.io | bash -s stable</code></p>
+
+<p> <code>source ~/.rvm/scripts/rvm</code></p>
+
+<p> 修改到淘宝的服务器</p>
+
+<p> <code>cp $rvm_path/config/db $rvm_path/config/db.bak</code></p>
+
+<p> <code>sed 's!ftp.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!' $rvm_path/config/db</code></p>
+
+<p> 安装缺失模块</p>
+
+<p> <code>sudo apt-get install git-core</code></p>
+
+<p> <code>sudo apt-get install sqlite3 libgdbm-dev libncurses5-dev bison libffi-dev</code></p>
+
+<p> 安装 ruby 1.9.3</p>
+
+<p> <code>rvm install 1.9.3</code></p></li>
+<li><p>设置 ruby 版本和 gemset</p>
+
+<p> <code>rvm use 1.9.3</code></p>
+
+<p> <code>rvm gemset create rails3213</code></p>
+
+<p> <code>rvm use 1.9.3@rails3213 --default</code></p></li>
+<li><p>安装 passneger 和 nginx</p>
+
+<p> <code>gem install passenger</code></p>
+
+<p> <code>rvmsudo passenger-install-nginx-module</code></p>
+
+<p> <code>在接下来的选项依次选按 enter/1/enter</code></p></li>
+<li><p>安装  rails</p>
+
+<p> 替换淘宝的源</p>
+
+<p> <code>gem source -r http://rubygems.org/</code></p>
+
+<p> <code>gem source -a http://ruby.taobao.org</code></p>
+
+<p> <code>gem install rails</code></p></li>
+<li><p>创建一个测试 nginx 的 rails 项目</p>
+
+<p> <code>mkdir ~/projects &amp;&amp; cd ~/projects</code></p>
+
+<p> <code>rails new demo</code></p>
+
+<p> 把 demo 目录下面的 Gemfile 第一行改为 source &#8216;http://ruby.taobao.org&#8217;</p>
+
+<p> <code>cd demo</code></p>
+
+<p> <code>bundle install</code></p>
+
+<p> 安装 node.js 作为 Rails 的 Javascript engine</p>
+
+<p> <code>sudo apt-get install nodejs</code></p>
+
+<p> 测试 rails 项目</p>
+
+<p> <code>rails s</code></p></li>
+<li><p>配置 nginx 指向测试的 rails 项目</p>
+
+<p>编辑 /opt/nginx/conf/nginx.conf</p>
+
+<p><code>sudo vi /opt/nginx/conf/nginx.conf</code></p>
+
+<p>注释掉 server 里面的东西,写成这样:</p></li>
+</ol>
+
+
+<figure class='code'><figcaption><span>lang: ruby </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>server{
+</span><span class='line'>        listen       80;
+</span><span class='line'>        server_name  localhost;
+</span><span class='line'>
+</span><span class='line'>        root /home/ubuntu/projects/demo/public;
+</span><span class='line'>        passenger_enabled on;
+</span><span class='line'>        rails_env production;
+</span><span class='line'>    }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上面的 root 后面指向的是测试的 rails 项目里面的 public 目录,在这个配置文件的最上面加入:</p>
+
+<pre><code>`user root;`
+</code></pre>
+
+<ol>
+<li><p>配置测试的 rails 项目</p>
+
+<p> <code>cd ~/project/demo</code></p>
+
+<p> <code>echo “rvm use 1.9.3@rails3213”  &gt; .rvmrc (这个可选)</code></p>
+
+<p> <code>rvm rvmrc trust</code></p>
+
+<p> 增加 config/setup_load_path.rb, 贴上以下代码并且保存:</p></li>
+</ol>
+
+
+<figure class='code'><figcaption><span>lang: ruby </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>if ENV['MY_RUBY_HOME'] && ENV['MY_RUBY_HOME'].include?('rvm')
+</span><span class='line'>  begin
+</span><span class='line'>    gems_path = ENV['MY_RUBY_HOME'].split(/@/)[0].sub(/rubies/,'gems')
+</span><span class='line'>    ENV['GEM_PATH'] = "#{gems_path}:#{gems_path}@global"
+</span><span class='line'>    require 'rvm'
+</span><span class='line'>    RVM.use_from_path! File.dirname(File.dirname(__FILE__))
+</span><span class='line'>  rescue LoadError
+</span><span class='line'>    raise "RVM gem is currently unavailable."
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'># If you're not using Bundler at all, remove lines bellow
+</span><span class='line'>ENV['BUNDLE_GEMFILE'] = File.expand_path('../Gemfile', File.dirname(__FILE__))
+</span><span class='line'>require 'bundler/setup'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后启动nginx:</p>
+
+<pre><code>`sudo /opt/nginx/sbin/nginx`
+</code></pre>
+
+<p>停止 nginx 可以用:</p>
+
+<pre><code>`sudo /opt/nginx/sbin/nginx  -s stop`
+</code></pre>
+
+<ul>
+<li>全文完</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Use Engine Yard service as a socket5 proxy]]></title>

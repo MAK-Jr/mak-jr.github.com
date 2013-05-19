@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-05-05T10:17:23+08:00</updated>
+  <updated>2013-05-19T20:47:12+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[這幾天一直在K關於腸病毒的資料]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/05/19/zhe-ji-tian-yi-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/"/>
+    <updated>2013-05-19T20:38:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/05/19/zhe-ji-tian-yi-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao</id>
+    <content type="html"><![CDATA[<p>經過10多天的感冒,好了以後,外加一個多星期的腸胃不適(現在還沒有完全恢復),換了3個醫生.終於在我們鎮的醫院的院長那裡把病情給穩定下來了.~哈.</p>
+
+<p>經過這些天的觀察,我有點想把自己這段時間的病情歸結於&#8221;腸病毒&#8221;,因為這次的感冒實在太詭異了,跟以往卻有很多不同.發燒,頭疼,怕冷,腹瀉,一天喝4碗中藥.~哈,還加了一個類似白加黑才治好.</p>
+
+<p>所以,一連很多天,我都在google腸病毒的資料,剛好facebook上一個朋友的姐姐也得了腸病毒,經過我的觀察和對比,腸病毒確實可以解釋我這段時間的病徵.明天要去複診,剛好可以跟醫生確定一下是否是腸病毒.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[這幾天一直在K關於腸病毒的資料]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/05/19/zhe-ji-tian-%5B%3F%5D-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/"/>
+    <updated>2013-05-19T20:38:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/05/19/zhe-ji-tian-[?]-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Deploy Nginx and Passenger on Ubuntu]]></title>

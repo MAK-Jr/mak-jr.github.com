@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Use Engine Yard service as a socket5 proxy - Pitt Mak</title>
+  <title>這幾天一直在K關於腸病毒的資料 - Pitt Mak</title>
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="Engine Yard 使用 Amazon Web Services(AWS) 作為服務器, 同時也提供了 SSH acess. 在大陸, 為了 bypass 國家的 firewall 去訪問一下被牆的網站, 通常都需要翻牆, 有了 AWS, 最最簡單的 bypass 方法, 就是用 ssh &hellip;">
+  <meta name="description" content="
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/">
+  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/05/19/zhe-ji-tian-%5B%3F%5D-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -68,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Use Engine Yard Service as a Socket5 Proxy</h1>
+      <h1 class="entry-title">這幾天一直在K關於腸病毒的資料</h1>
     
     
       <p class="meta">
@@ -84,7 +85,7 @@
   
 
 
-<time datetime="2013-02-08T10:22:00+08:00" pubdate data-updated="true">Feb 8<span>th</span>, 2013</time>
+<time datetime="2013-05-19T20:38:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,21 +94,7 @@
   </header>
 
 
-<div class="entry-content"><p>Engine Yard 使用 Amazon Web Services(AWS) 作為服務器, 同時也提供了 SSH acess. 在大陸, 為了 bypass 國家的 firewall 去訪問一下被牆的網站, 通常都需要翻牆, 有了 AWS, 最最簡單的 bypass 方法, 就是用 ssh 通道作為 socket5 代理, 就行了.</p>
-
-<p>所以, 建立好 instance 後, 直接用 <code>ssh -C2qTnN -D 8080 yourserver</code> 就可以在本地開一個 socket5 代理了. 配合 chrome 的代理外掛, 就可以順利翻牆了, 非常簡單.</p>
-
-<p><code>PS. Engine Yard 提供了500個小時的免費運行時間</code></p>
-
-<p><a href="http://www.engineyard.com">Engine Yard</a></p>
-
-<p>使用過程中碰到一個問題, SSH 通道變成 socket5 代理, 使用一小段時間後, 會出現變慢的現象, 結果我亂來了一通, 結果給治好了, 記錄一下亂來的 steps</p>
-
-<ul>
-<li>編輯 ~/.ssh/config, 加入這行 <code>ServerAliveInterval 8</code></li>
-<li>想辦法節省服務器上面的資源, 其實就是讓 instance 在部署環境的時候失敗, 這樣可以節省不少 memory 哦. 讓他失敗的方法就是在 boot 的時候, 刷新一下頁面, 這個方法我一直在用, 如果還是不行, 就加入一個 unix pakage, 也是在 apply 的過程中刷新一下頁面.</li>
-</ul>
-
+<div class="entry-content">
 </div>
 
 
@@ -130,7 +117,7 @@
   
 
 
-<time datetime="2013-02-08T10:22:00+08:00" pubdate data-updated="true">Feb 8<span>th</span>, 2013</time>
+<time datetime="2013-05-19T20:38:00+08:00" pubdate data-updated="true">May 19<span>th</span>, 2013</time>
       
 
 
@@ -138,7 +125,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/05/19/zhe-ji-tian-%5B%3F%5D-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/05/19/zhe-ji-tian-%5B%3F%5D-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/" >Tweet</a>
   
   
   
@@ -147,10 +134,10 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/" title="Previous Post: Rails 3.2.11 assets pipeline error solution">&laquo; Rails 3.2.11 assets pipeline error solution</a>
+        <a class="basic-alignment left" href="/blog/2013/05/05/deploy-nginx-and-passenger-on-ubuntu/" title="Previous Post: Deploy Nginx and Passenger on Ubuntu">&laquo; Deploy Nginx and Passenger on Ubuntu</a>
       
       
-        <a class="basic-alignment right" href="/blog/2013/05/05/deploy-nginx-and-passenger-on-ubuntu/" title="Next Post: Deploy Nginx and Passenger on Ubuntu">Deploy Nginx and Passenger on Ubuntu &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2013/05/19/zhe-ji-tian-yi-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/" title="Next Post: 這幾天一直在K關於腸病毒的資料">這幾天一直在K關於腸病毒的資料 &raquo;</a>
       
     </p>
   </footer>
@@ -217,8 +204,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/';
-        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/';
+        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/05/19/zhe-ji-tian-%5B%3F%5D-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/';
+        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/05/19/zhe-ji-tian-%5B%3F%5D-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/';
         var disqus_script = 'embed.js';
       
     (function () {

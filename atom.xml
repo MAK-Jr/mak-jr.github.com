@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-05-19T20:51:19+08:00</updated>
+  <updated>2013-06-07T17:14:32+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[農行網上支付IE證書問題的解決]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/06/07/nonghangiezhengshuwenti/"/>
+    <updated>2013-06-07T17:07:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/06/07/nonghangiezhengshuwenti</id>
+    <content type="html"><![CDATA[<p>今天想用 paypal 來支付 digitalocean 的 VPS,卡在農行的 IE 證書登陸頁面.客户的浏览器有拦截提示，拦截的文件为Netsign.Cab，提示为未能识别发行者.</p>
+
+<p>解決的方法如下,特此記錄.</p>
+
+<ul>
+<li>打开IE浏览器，在菜单栏里选择“工具”然后选择“INTERNET选项”</li>
+<li>在打开的“INTERNET选项”对话框中选择“安全”选项卡，然后选择“可信站点”再点击“站点”</li>
+<li><p>分别将下面3个站点添加进信任站点</p>
+
+<p>  <code>https://easyabc.95599.cn</code></p>
+
+<p>  <code>https://*.95599.cn</code></p>
+
+<p>  <code>https://www.95599.cn</code></p></li>
+<li><p>点击“可信站点”然后再点击“自定义级别(C)&#8230;”对Activex控件进行设置。這裡為了簡單,可以把所有關於ActiveX的設置都修改為啟用(enable),為了瀏覽器的安全上網,支付後,請修改為默認設置.</p></li>
+</ul>
+
+
+<p>重啟瀏覽器後一切正常使用.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[這幾天一直在K關於腸病毒的資料]]></title>

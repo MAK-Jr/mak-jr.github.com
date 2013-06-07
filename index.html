@@ -9,7 +9,8 @@
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="經過10多天的感冒,好了以後,外加一個多星期的腸胃不適(現在還沒有完全恢復),換了3個醫生.終於在我們鎮的醫院的院長那裡把病情給穩定下來了.~哈. 經過這些天的觀察,我有點想把自己這段時間的病情歸結於&#8221;腸病毒&#8221;,因為這次的感冒實在太詭異了,跟以往卻有很多不同.發燒,頭疼, &hellip;">
+  <meta name="description" content="今天想用 paypal 來支付 digitalocean 的 VPS,卡在農行的 IE 證書登陸頁面.客户的浏览器有拦截提示，拦截的文件为Netsign.Cab，提示为未能识别发行者. 解決的方法如下,特此記錄. 打开IE浏览器，在菜单栏里选择“工具”然后选择“INTERNET选项”
+在打开的“ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,62 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/07/nonghangiezhengshuwenti/">農行網上支付IE證書問題的解決</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-07T17:07:00+08:00" pubdate data-updated="true">Jun 7<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/07/nonghangiezhengshuwenti/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>今天想用 paypal 來支付 digitalocean 的 VPS,卡在農行的 IE 證書登陸頁面.客户的浏览器有拦截提示，拦截的文件为Netsign.Cab，提示为未能识别发行者.</p>
+
+<p>解決的方法如下,特此記錄.</p>
+
+<ul>
+<li>打开IE浏览器，在菜单栏里选择“工具”然后选择“INTERNET选项”</li>
+<li>在打开的“INTERNET选项”对话框中选择“安全”选项卡，然后选择“可信站点”再点击“站点”</li>
+<li><p>分别将下面3个站点添加进信任站点</p>
+
+<p>  <code>https://easyabc.95599.cn</code></p>
+
+<p>  <code>https://*.95599.cn</code></p>
+
+<p>  <code>https://www.95599.cn</code></p></li>
+<li><p>点击“可信站点”然后再点击“自定义级别(C)&#8230;”对Activex控件进行设置。這裡為了簡單,可以把所有關於ActiveX的設置都修改為啟用(enable),為了瀏覽器的安全上網,支付後,請修改為默認設置.</p></li>
+</ul>
+
+
+<p>重啟瀏覽器後一切正常使用.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -823,64 +880,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/07/zai-railszhong-shi-yong-prylai-zuo-diao-shi/">在Rails中使用Pry來做調試</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-07T15:07:00+08:00" pubdate data-updated="true">Jan 7<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/01/07/zai-railszhong-shi-yong-prylai-zuo-diao-shi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul>
-<li><p>首先安裝Pry這個Gem</p>
-
-<p>  <code>sudo gem install pry</code></p></li>
-<li>其他參考這篇文章</li>
-</ul>
-
-
-<p>　<a href="http://filipemoreira.com/blog/2012/03/09/using-pry-with-rails">Using Pry With Rails</a></p>
-
-<ul>
-<li>使用方法</li>
-</ul>
-
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'> <span class="nb">binding</span><span class="o">.</span><span class="n">pry</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>　　可以在Model, Controller, View裡面使用</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -896,6 +895,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/07/nonghangiezhengshuwenti/">農行網上支付IE證書問題的解決</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/19/zhe-ji-tian-yi-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/">這幾天一直在K關於腸病毒的資料</a>
       </li>
     
@@ -909,10 +912,6 @@
     
       <li class="post">
         <a href="/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/">Rails 3.2.11 assets pipeline error solution</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/01/23/cheng-gong-bu-shu-octopress/">成功部署octopress</a>
       </li>
     
   </ul>

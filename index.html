@@ -9,8 +9,7 @@
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="今天想用 paypal 來支付 digitalocean 的 VPS,卡在農行的 IE 證書登陸頁面.客户的浏览器有拦截提示，拦截的文件为Netsign.Cab，提示为未能识别发行者. 解決的方法如下,特此記錄. 打开IE浏览器，在菜单栏里选择“工具”然后选择“INTERNET选项”
-在打开的“ &hellip;">
+  <meta name="description" content="看完陳省身的一身這部紀錄片後,順帶看到了Kirby的一部interview. ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,47 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/06/09/kirby-interview/">Kirby Interview</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-09T19:25:00+08:00" pubdate data-updated="true">Jun 9<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/06/09/kirby-interview/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>看完陳省身的一身這部紀錄片後,順帶看到了Kirby的一部interview.</p>
+
+<iframe src="http://player.vimeo.com/video/66841760" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -800,86 +840,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/13/ruby-gemsli-xian-ji/">Ruby Gems歷險記</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-13T16:10:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/01/13/ruby-gemsli-xian-ji/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>想安裝Cloudfoundry的command line tool,所以就這樣來做</p>
-
-<p><code>sudo gem install vmc</code></p>
-
-<p>失敗,提示</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>ERROR:  While executing gem ... (Zlib::GzipFile::Error)
-</span><span class='line'>    not in gzip format</span></code></pre></td></tr></table></div></figure>
-
-
-<p>懷疑是網絡問題,所以查看gem的sources,運行</p>
-
-<p><code>gem sources</code></p>
-
-<p>輸出:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>*** CURRENT SOURCES ***
-</span><span class='line'>
-</span><span class='line'>http://rubygems.org/
-</span><span class='line'>http://ruby.taobao.org
-</span><span class='line'>http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>依次把其他sources都刪除,只留 <code>http://rubygems.org/</code></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gem sources -r http://ruby.taobao.org
-</span><span class='line'>gem sources -r http://gems.rubyforge.org/</span></code></pre></td></tr></table></div></figure>
-
-
-<p>再次運行:</p>
-
-<p><code>sudo gem install vmc</code></p>
-
-<p>成功!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -895,6 +855,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/06/09/kirby-interview/">Kirby Interview</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/07/nonghangiezhengshuwenti/">農行網上支付IE證書問題的解決</a>
       </li>
     
@@ -908,10 +872,6 @@
     
       <li class="post">
         <a href="/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/">Use Engine Yard service as a socket5 proxy</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/">Rails 3.2.11 assets pipeline error solution</a>
       </li>
     
   </ul>

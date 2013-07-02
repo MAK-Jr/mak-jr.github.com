@@ -9,9 +9,7 @@
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="想安裝Cloudfoundry的command line tool,所以就這樣來做 sudo gem install vmc 失敗,提示 1
-2
-ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &hellip;">
+  <meta name="description" content="問題: CloundFoundry(以下簡稱CF)上面沒有提供CronJob(定時背景任務)的功能,所以,自己想打造一個守護程式來做網頁抓取. 方法: 首先,往CF部署一個默認的Rails程式.這方面的教程可以參考CF的Documents 然後,可以在CF上面的rails裡面新建一個Process &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -67,6 +65,207 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/">CF上面自造一个CronJob</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-15T15:29:00+08:00" pubdate data-updated="true">Jan 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/01/15/cfshang-mian-zi-zao-yi-ge-cronjob/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>問題:</p>
+
+<p>CloundFoundry(以下簡稱CF)上面沒有提供CronJob(定時背景任務)的功能,所以,自己想打造一個守護程式來做網頁抓取.</p>
+
+<p>方法:</p>
+
+<p>首先,往CF部署一個默認的Rails程式.這方面的教程可以參考CF的<a href="http://docs.cloudfoundry.com/frameworks/ruby/rails-3-1.html">Documents</a></p>
+
+<p>然後,可以在CF上面的rails裡面新建一個Process,用來跑deamon.rb(我們的守護程式,放到Rails的根目錄下面,因為CF上面用戶的當前目錄便是此目錄,方便敲打命令)</p>
+
+<p>最後,我把需要用到的關鍵代碼貼一下,主要是Controller的代碼:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">ShellController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="c1">#binding.pry</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span>
+</span><span class='line'>      <span class="n">cmd</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="s1">&#39;cmd&#39;</span><span class="o">]</span>
+</span><span class='line'>      <span class="n">t</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="s1">&#39;type&#39;</span><span class="o">]</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s1">&#39;fork&#39;</span>
+</span><span class='line'>        <span class="vi">@output</span> <span class="o">=</span> <span class="n">fork_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">elsif</span> <span class="n">t</span> <span class="o">==</span> <span class="s1">&#39;nofork&#39;</span>
+</span><span class='line'>        <span class="vi">@output</span> <span class="o">=</span> <span class="n">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>        <span class="vi">@output</span> <span class="o">=</span> <span class="vi">@output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;&lt;br \&gt;&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;GET&#39;</span>
+</span><span class='line'>      <span class="vi">@output</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">fork_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">Thread</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>      <span class="nb">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="c1">#fork { cmd }</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">execute_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="sx">%x[</span><span class="si">#{</span><span class="n">cmd</span><span class="si">}</span><span class="sx">]</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最最關鍵的地方是這裡:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">fork_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="no">Thread</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>      <span class="nb">system</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="c1">#fork { cmd }</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>原先我用了<code>fork {cmd}</code>,但是這樣的話,無法用kill這個命令來關掉fork出來的Process,所以改用Thread.new.</p>
+
+<p>整個demo可以在下面的地址看到<a href="http://ruby-web-shell.cloudfoundry.com/shell">Demo</a></p>
+
+<p>先輸入<code>ruby　deamon.rb</code>,再修改type為fork.提交.</p>
+
+<p>然後輸入ps,提交.應該就可以看到已經有兩個ruby進程在跑了.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/">在Mac OS X安裝Mysql</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-13T18:26:00+08:00" pubdate data-updated="true">Jan 13<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/01/13/zai-mac-os-xan-zhuang-mysql/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>簡單安裝</p>
+
+<ol>
+<li><p>使用HomeBrew安裝mysql</p>
+
+<p> <code>brew install mysql</code></p></li>
+<li><p>配置數據庫</p></li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li><p>運行mysql和進入管理界面</p>
+
+<p> <code>/usr/local/opt/mysql/bin/mysqld_safe &amp;</code></p>
+
+<p> <code>mysql -uroot</code></p></li>
+</ol>
+
+
+<p>-=Done=-</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -379,6 +578,10 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/02/using-git-with-https-proxy/">Using git with https proxy</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/06/09/kirby-interview/">Kirby Interview</a>
       </li>
     
@@ -392,10 +595,6 @@ ERROR: While executing gem ... (Zlib::GzipFile::Error) not in gzip format &helli
     
       <li class="post">
         <a href="/blog/2013/05/05/deploy-nginx-and-passenger-on-ubuntu/">Deploy Nginx and Passenger on Ubuntu</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/08/use-engine-yard-service-as-a-socket5-proxy/">Use Engine Yard service as a socket5 proxy</a>
       </li>
     
   </ul>

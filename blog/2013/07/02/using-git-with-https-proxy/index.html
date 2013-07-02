@@ -5,12 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>成功部署octopress - Pitt Mak</title>
+  <title>Using git with https proxy - Pitt Mak</title>
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="這次是部署沒有用rake　deploy,而是進入_deploy後,git　push　origin,使用的是https的repo
-">
+  <meta name="description" content="為什麼為git使用https proxy 大陸經常性的遇到github，bitbucket不能正常使用的情況，所以需要使用proxy。 如何使用 1
+2
+3
+4
+git config --add http.proxy 127.0.0.1:8087
+git config --add https. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/01/23/cheng-gong-bu-shu-octopress/">
+  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/07/02/using-git-with-https-proxy/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -69,7 +73,7 @@
   
   <header>
     
-      <h1 class="entry-title">成功部署octopress</h1>
+      <h1 class="entry-title">Using Git With Https Proxy</h1>
     
     
       <p class="meta">
@@ -85,7 +89,7 @@
   
 
 
-<time datetime="2013-01-23T16:31:00+08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+<time datetime="2013-07-02T13:09:00+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -94,7 +98,33 @@
   </header>
 
 
-<div class="entry-content"><p>這次是部署沒有用<code>rake　deploy</code>,而是進入_deploy後,<code>git　push　origin</code>,使用的是https的repo</p>
+<div class="entry-content"><ul>
+<li>為什麼為git使用https proxy</li>
+</ul>
+
+
+<p>大陸經常性的遇到github，bitbucket不能正常使用的情況，所以需要使用proxy。</p>
+
+<ul>
+<li>如何使用</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git config --add http.proxy 127.0.0.1:8087
+</span><span class='line'>git config --add https.proxy 127.0.0.1:8087
+</span><span class='line'>git config --add https.sslVerify false
+</span><span class='line'>git config --global http.postBuffer 524288000</span></code></pre></td></tr></table></div></figure>
+
+
+<p>8087是本地的goagent的端口號。</p>
+
+<p>前提是必須使用git init後才能用上面的命令,因為會修改.git/config文件。</p>
+
+<p>最後，修改本地的repo的origin或者其他的remote為https協議。</p>
 </div>
 
 
@@ -117,7 +147,7 @@
   
 
 
-<time datetime="2013-01-23T16:31:00+08:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+<time datetime="2013-07-02T13:09:00+08:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2013</time>
       
 
 
@@ -125,7 +155,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/01/23/cheng-gong-bu-shu-octopress/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/01/23/cheng-gong-bu-shu-octopress/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/07/02/using-git-with-https-proxy/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/07/02/using-git-with-https-proxy/" >Tweet</a>
   
   
   
@@ -134,10 +164,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/01/23/gitdai-li-she-zhi-he-httpstong-dao/" title="Previous Post: git代理设置和https通道">&laquo; git代理设置和https通道</a>
+        <a class="basic-alignment left" href="/blog/2013/06/09/kirby-interview/" title="Previous Post: Kirby Interview">&laquo; Kirby Interview</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/02/03/rails-3-dot-2-11-assets-pipeline-error-solution/" title="Next Post: Rails 3.2.11 assets pipeline error solution">Rails 3.2.11 assets pipeline error solution &raquo;</a>
       
     </p>
   </footer>
@@ -204,8 +232,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/01/23/cheng-gong-bu-shu-octopress/';
-        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/01/23/cheng-gong-bu-shu-octopress/';
+        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/07/02/using-git-with-https-proxy/';
+        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/07/02/using-git-with-https-proxy/';
         var disqus_script = 'embed.js';
       
     (function () {

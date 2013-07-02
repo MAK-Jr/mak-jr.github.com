@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-06-09T19:28:24+08:00</updated>
+  <updated>2013-07-02T13:29:27+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using git with https proxy]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/07/02/using-git-with-https-proxy/"/>
+    <updated>2013-07-02T13:09:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/07/02/using-git-with-https-proxy</id>
+    <content type="html"><![CDATA[<ul>
+<li>為什麼為git使用https proxy</li>
+</ul>
+
+
+<p>大陸經常性的遇到github，bitbucket不能正常使用的情況，所以需要使用proxy。</p>
+
+<ul>
+<li>如何使用</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git config --add http.proxy 127.0.0.1:8087
+</span><span class='line'>git config --add https.proxy 127.0.0.1:8087
+</span><span class='line'>git config --add https.sslVerify false
+</span><span class='line'>git config --global http.postBuffer 524288000</span></code></pre></td></tr></table></div></figure>
+
+
+<p>8087是本地的goagent的端口號。</p>
+
+<p>前提是必須使用git init後才能用上面的命令,因為會修改.git/config文件。</p>
+
+<p>最後，修改本地的repo的origin或者其他的remote為https協議。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Kirby Interview]]></title>
@@ -351,6 +386,15 @@
 </span><span class='line'>  git push origin source
 </span><span class='line'>　</span></code></pre></td></tr></table></div></figure>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Test github]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/01/20/test-github/"/>
+    <updated>2013-01-20T15:36:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/01/20/test-github</id>
+    <content type="html"><![CDATA[
 ]]></content>
   </entry>
   

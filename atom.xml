@@ -4,7 +4,7 @@
   <title><![CDATA[Pitt Mak]]></title>
   <link href="http://MAK-Jr.github.com/atom.xml" rel="self"/>
   <link href="http://MAK-Jr.github.com/"/>
-  <updated>2013-07-02T13:29:27+08:00</updated>
+  <updated>2013-07-10T08:34:05+08:00</updated>
   <id>http://MAK-Jr.github.com/</id>
   <author>
     <name><![CDATA[Pitt Mak]]></name>
@@ -12,6 +12,43 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Vim auto-complete issue]]></title>
+    <link href="http://MAK-Jr.github.com/blog/2013/07/10/vim-auto-complete-issue/"/>
+    <updated>2013-07-10T08:27:00+08:00</updated>
+    <id>http://MAK-Jr.github.com/blog/2013/07/10/vim-auto-complete-issue</id>
+    <content type="html"><![CDATA[<p>重新安裝 MacVim 後，發現只要在行首或者空格後面按 Tab 都會自動做 auto－complete，這可不大妙，每次都要 ESC 後用空格來做 indentation。解決的方法是加入以下 script 到 .gvimrc.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" Prevent auto-complete while the cursor at the beginning of line or not on a
+</span><span class='line'>" word
+</span><span class='line'>function! InsertTabWrapper()
+</span><span class='line'>    let col = col('.') - 1
+</span><span class='line'>    if !col || getline('.')[col - 1] !~ '\k'
+</span><span class='line'>        return "\&lt;tab>"
+</span><span class='line'>    else
+</span><span class='line'>        return "\&lt;c-p>"
+</span><span class='line'>    endif
+</span><span class='line'>endfunction
+</span><span class='line'>
+</span><span class='line'>inoremap &lt;tab> &lt;c-r>=InsertTabWrapper()&lt;cr></span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using git with https proxy]]></title>

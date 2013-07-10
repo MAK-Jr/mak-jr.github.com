@@ -9,12 +9,19 @@
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="為什麼為git使用https proxy 大陸經常性的遇到github，bitbucket不能正常使用的情況，所以需要使用proxy。 如何使用 1
+  <meta name="description" content="重新安裝 MacVim 後，發現只要在行首或者空格後面按 Tab 都會自動做 auto－complete，這可不大妙，每次都要 ESC 後用空格來做 indentation。解決的方法是加入以下 script 到 .gvimrc. 1
 2
 3
 4
-git config --add http.proxy 127.0.0.1:8087
-git config --add https. &hellip;">
+5
+6
+7
+8
+9
+10
+11
+12
+" &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +77,72 @@ git config --add https. &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/10/vim-auto-complete-issue/">Vim Auto-complete Issue</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T08:27:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/07/10/vim-auto-complete-issue/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>重新安裝 MacVim 後，發現只要在行首或者空格後面按 Tab 都會自動做 auto－complete，這可不大妙，每次都要 ESC 後用空格來做 indentation。解決的方法是加入以下 script 到 .gvimrc.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" Prevent auto-complete while the cursor at the beginning of line or not on a
+</span><span class='line'>" word
+</span><span class='line'>function! InsertTabWrapper()
+</span><span class='line'>    let col = col('.') - 1
+</span><span class='line'>    if !col || getline('.')[col - 1] !~ '\k'
+</span><span class='line'>        return "\&lt;tab>"
+</span><span class='line'>    else
+</span><span class='line'>        return "\&lt;c-p>"
+</span><span class='line'>    endif
+</span><span class='line'>endfunction
+</span><span class='line'>
+</span><span class='line'>inoremap &lt;tab> &lt;c-r>=InsertTabWrapper()&lt;cr></span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -708,44 +781,6 @@ git config --add https. &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/20/test-github/">Test Github</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-20T15:36:00+08:00" pubdate data-updated="true">Jan 20<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/01/20/test-github/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -761,6 +796,10 @@ git config --add https. &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/10/vim-auto-complete-issue/">Vim auto-complete issue</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/02/using-git-with-https-proxy/">Using git with https proxy</a>
       </li>
     
@@ -774,10 +813,6 @@ git config --add https. &hellip;">
     
       <li class="post">
         <a href="/blog/2013/05/19/zhe-ji-tian-yi-zhi-zai-kguan-yu-chang-bing-du-de-zi-liao/">這幾天一直在K關於腸病毒的資料</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/05/deploy-nginx-and-passenger-on-ubuntu/">Deploy Nginx and Passenger on Ubuntu</a>
       </li>
     
   </ul>

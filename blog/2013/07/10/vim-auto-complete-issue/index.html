@@ -5,11 +5,23 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: English - Pitt Mak</title>
+  <title>Vim auto-complete issue - Pitt Mak</title>
   <meta name="author" content="Pitt Mak">
 
   
-  <meta name="description" content="Category: English">
+  <meta name="description" content="重新安裝 MacVim 後，發現只要在行首或者空格後面按 Tab 都會自動做 auto－complete，這可不大妙，每次都要 ESC 後用空格來做 indentation。解決的方法是加入以下 script 到 .gvimrc. 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+" &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +30,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://MAK-Jr.github.comblog/categories/english/">
+  <link rel="canonical" href="http://MAK-Jr.github.com/blog/2013/07/10/vim-auto-complete-issue/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -64,36 +76,115 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: English</h1>
+    
+      <h1 class="entry-title">Vim Auto-complete Issue</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T08:27:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>重新安裝 MacVim 後，發現只要在行首或者空格後面按 Tab 都會自動做 auto－complete，這可不大妙，每次都要 ESC 後用空格來做 indentation。解決的方法是加入以下 script 到 .gvimrc.</p>
 
-  
-  <h2>2013</h2>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>" Prevent auto-complete while the cursor at the beginning of line or not on a
+</span><span class='line'>" word
+</span><span class='line'>function! InsertTabWrapper()
+</span><span class='line'>    let col = col('.') - 1
+</span><span class='line'>    if !col || getline('.')[col - 1] !~ '\k'
+</span><span class='line'>        return "\&lt;tab>"
+</span><span class='line'>    else
+</span><span class='line'>        return "\&lt;c-p>"
+</span><span class='line'>    endif
+</span><span class='line'>endfunction
+</span><span class='line'>
+</span><span class='line'>inoremap &lt;tab> &lt;c-r>=InsertTabWrapper()&lt;cr></span></code></pre></td></tr></table></div></figure>
 
-<article>
-  
-<h1><a href="/blog/2013/01/04/ying-ying-zi-dian-de-yi-xie-hao-chu/">英英字典的一些好處</a></h1>
-<time datetime="2013-01-04T21:26:00+08:00" pubdate><span class='month'>Jan</span> <span class='day'>04</span> <span class='year'>2013</span></time>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/english/'>English</a></span>
-</footer>
-
-
-</article>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Pitt Mak</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-10T08:27:00+08:00" pubdate data-updated="true">Jul 10<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://MAK-Jr.github.com/blog/2013/07/10/vim-auto-complete-issue/" data-via="" data-counturl="http://MAK-Jr.github.com/blog/2013/07/10/vim-auto-complete-issue/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/02/using-git-with-https-proxy/" title="Previous Post: Using git with https proxy">&laquo; Using git with https proxy</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -149,7 +240,10 @@
       var disqus_shortname = 'pittmak';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://MAK-Jr.github.com/blog/2013/07/10/vim-auto-complete-issue/';
+        var disqus_url = 'http://MAK-Jr.github.com/blog/2013/07/10/vim-auto-complete-issue/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

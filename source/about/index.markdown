@@ -6,6 +6,8 @@ comments: true
 sharing: true
 footer: true
 ---
-Fall in love with Ruby and Rails, as well as Objective-c!
 
-Send me mail at <Skeleton.MAK.Jr@gmail.com>
+***Follow the white rabbit***
+
+[Github](https://github.com/aaron-elkins)
+
